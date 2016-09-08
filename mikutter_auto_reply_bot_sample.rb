@@ -13,13 +13,13 @@ Plugin.create(:mikutter_auto_reply_bot_sample) do
 
   on_appear do |ms|
     ms.each do |m|
-      if m.message.to_s =~ /sample/ and m[:created] > DEFINED_TIME and !m.retweet?
+      if m.to_s =~ /sample/ and m[:created] > DEFINED_TIME and !m.retweet?
         # select reply dic & get sample reply
         reply = default.sample
 
         # send reply & fav
         Service.primary.post(:message => "@#{m.user.idname} #{reply}", :replyto => m)
-        m.message.favorite(true)
+        m.favorite(true)
       end
     end
   end
