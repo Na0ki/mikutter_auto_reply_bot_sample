@@ -18,7 +18,8 @@ Plugin.create(:mikutter_auto_reply_bot_sample) do
         reply = default.sample
 
         # send reply & fav
-        Service.primary.post(:message => "@#{m.user.idname} #{reply}", :replyto => m)
+        m.post(:message => "@#{m.user.idname} #{reply}",
+               :replyto => m)
         m.favorite(true)
       end
     end
